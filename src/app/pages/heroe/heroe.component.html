@@ -1,1 +1,45 @@
-<p>heroe works!</p>
+<h1> Heroe <small> Nombre de Heroe</small></h1>
+
+<hr>
+
+<div class="col text-right">
+    <button class="btn btn-danger" routerLink="/heroes">
+        <i class="fa fa-arrow-left"></i> 
+        Regresar 
+    </button>
+
+</div>
+
+<div class="row mt-3">
+    <div class=" col">
+        <form [formGroup]="forma" (ngSubmit)="guardar()">
+
+            <div class="form-group">
+                <label> Firebase ID </label>
+                <input formControlName="firebaseId" class="form-control" disabled="disabled" type="text">
+                <small class=" text-muted form-text"> Este campo es autogenerado</small>
+            </div>
+            <div class="form-group ">
+                <label> Nombre </label>
+                <input placeholder="Nombre del heroe" formControlName="nombre" class="form-control" required type="text">
+            </div>
+            <div class="form-group ">
+                <label> Poder  </label>
+                <input placeholder="Poder del heroe" formControlName="poder" class="form-control" required type="text">
+            </div>
+
+            <div class="form-group">
+                <label>Estado</label>
+                <br>
+                <button type="button" class=" btn btn-success w-50"> <i class="fa fa-smile-wink"></i> Vivo </button>
+                <button type="button" class=" btn btn-danger w-50"> <i class="fa fa-dizzy"></i> Muerto </button>
+            </div>
+            <div class="form-group">
+                <button type="submit" class=" btn btn-info btn-block">
+                    <i class="fa fa-save"></i>
+                    Guardar
+                </button>
+            </div>
+
+        </form>
+    </div>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 
 @Component({
   selector: 'app-heroe',
@@ -6,10 +7,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./heroe.component.css']
 })
 export class HeroeComponent implements OnInit {
-
-  constructor() { }
+  forma: FormGroup;
+  constructor( ) { }
 
   ngOnInit(): void {
   }
-
+  guardar(){
+    return ;
+  }
 }
