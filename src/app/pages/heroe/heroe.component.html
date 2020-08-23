@@ -31,8 +31,8 @@
             <div class="form-group">
                 <label>Estado</label>
                 <br>
-                <button type="button" class=" btn btn-success w-50"> <i class="fa fa-smile-wink"></i> Vivo </button>
-                <button type="button" class=" btn btn-danger w-50"> <i class="fa fa-dizzy"></i> Muerto </button>
+                <button type="button" *ngIf="heroeVivo" (click)="matarHeroe()" class=" btn btn-success w-50"> <i class="fa fa-smile-wink"></i> Vivo </button>
+                <button type="button" *ngIf="!heroeVivo" class=" btn btn-danger w-50"> <i class="fa fa-dizzy"></i> Muerto </button>
             </div>
             <div class="form-group">
                 <button type="submit" class=" btn btn-info btn-block">
