@@ -20,17 +20,32 @@ export class HeroeComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  get heroeVivo(){
+  get isAlive(){
     return this.forma.get('vivo').value;
+  }
+  get heroeNombre(){
+    return this.forma.get('nombre').value;
+  }
+  get heroePoder(){
+    return this.forma.get('poder').value;
   }
 
   crearFormulario(){
     this.forma = this.fb.group( {
       firebaseId: [],
-      nombre: [],
-      poder: [],
+      nombre: [, Validators.required],
+      poder: [, Validators.required],
       vivo: [true],
     });
+  }
+
+  heroeVivo(){
+    this.forma.controls['vivo'].setValue(true);
+    console.log(this.isAlive);
+  }
+  heroeMuerto(){
+    this.forma.controls['vivo'].setValue(false);
+    console.log(this.isAlive);
   }
 
   guardar(){
@@ -38,7 +53,15 @@ export class HeroeComponent implements OnInit {
       console.log('Formulario no es valido');
       return ;
     }
-    console.log('Disparar Submmit');
-    console.log(this.forma);
+
+    this.heroe.nombre = this.heroeNombre;
+    this.heroe.poder = this.heroePoder;
+    this.heroe.vivo = this.isAlive;
+
+    this.heroeService.crearHeroe( this.heroe ).
+      subscribe(resp => {
+        this.forma.controls['firebaseId'].setValue(resp.id);
+        console.log(resp);
+      });
     }
 }

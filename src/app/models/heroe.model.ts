@@ -5,10 +5,5 @@ export class HeroeModel {
     vivo: boolean;
 
     constructor() {
-        this.vivo = true;
     }
-
-    matarHeroe(){
-        this.vivo = false;
-    }
-};
+}
