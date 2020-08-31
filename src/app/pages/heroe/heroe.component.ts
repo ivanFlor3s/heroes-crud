@@ -29,6 +29,10 @@ export class HeroeComponent implements OnInit {
   get heroePoder(){
     return this.forma.get('poder').value;
   }
+  get heroeId(){
+    return this.forma.get('firebaseId').value;
+  }
+
 
   crearFormulario(){
     this.forma = this.fb.group( {
@@ -58,10 +62,18 @@ export class HeroeComponent implements OnInit {
     this.heroe.poder = this.heroePoder;
     this.heroe.vivo = this.isAlive;
 
-    this.heroeService.crearHeroe( this.heroe ).
+    if ( this.heroeId ){
+      this.heroeService.actualizarHeroe( this.heroe ).
+      subscribe(resp => {
+        console.log(resp);
+      });
+    } else {
+      this.heroeService.crearHeroe( this.heroe ).
       subscribe(resp => {
         this.forma.controls['firebaseId'].setValue(resp.id);
         console.log(resp);
       });
     }
+
+   }
 }
