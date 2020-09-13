@@ -22,6 +22,10 @@ export class HeroeServiceService {
       );
   }
 
+  getHeroe( id: string) {
+    return this.http.get(`${this.url}/heroes/${id}.json`);
+  }
+
   actualizarHeroe( heroe: HeroeModel){
     const heroeTemp = {
       ...heroe

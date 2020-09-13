@@ -4,6 +4,7 @@ import { HeroeModel } from '../../models/heroe.model';
 import { HeroeServiceService } from '../../services/heroe-service.service';
 
 import  Swal  from 'sweetalert2';
+import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -16,11 +17,28 @@ export class HeroeComponent implements OnInit {
 
   heroe = new HeroeModel();
 
-  constructor( private fb: FormBuilder, private heroeService: HeroeServiceService ) {
+  constructor( private fb: FormBuilder,
+               private heroeService: HeroeServiceService,
+               private router: ActivatedRoute ) {
     this.crearFormulario();
   }
 
   ngOnInit(): void {
+
+   const id = this.router.snapshot.paramMap.get('id');
+
+   if ( id !== 'nuevo'){
+    this.heroeService.getHeroe(id).subscribe( (resp: HeroeModel) => {
+      this.heroe = resp;
+      this.heroe.id = resp.id;
+      console.log(this.heroe);
+    });
+    //TODO Corregir el Form para que tome los valores del heroe cuando alguien entra desde el boton de Edit
+    this.forma.controls['firebaseId'].setValue(this.heroe.id);
+    this.forma.controls['nombre'].setValue(this.heroe.nombre);
+    this.forma.controls['poder'].setValue(this.heroe.poder);
+    this.forma.controls['vivo'].setValue(this.heroe.vivo);
+   }
   }
   get isAlive(){
     return this.forma.get('vivo').value;
