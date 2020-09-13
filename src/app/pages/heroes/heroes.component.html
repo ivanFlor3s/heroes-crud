@@ -3,7 +3,7 @@
 <div class="col text-right">
     <button class="btn btn-primary" routerLink="/heroe/nuevo"> + Agregar </button>
 </div>
-<table class="table mt-3">
+<table *ngIf="!cargando && heroes.length > 0" class="table mt-3  animated fadeIn faster">
     <thead class="thead-dark">
         <tr>
             <th scope="col">#</th>
@@ -26,21 +26,21 @@
                 <button class=" btn btn-info mr-2" [routerLink]="['/heroe', heroe.id]">
                     <i class="fa fa-pen"> </i>
                 </button>
-                <button class=" btn btn-danger">
+                <button class=" btn btn-danger" (click)="borrarHeroe(heroe, i)">
                     <i class="fa fa-trash"> </i>
                 </button>
             </td>
     </tbody>
 </table>
 
-<div class="alert-info alert text-center mt-3">
+<div *ngIf="cargando" class="alert-info alert text-center mt-3 animated fadeIn faster">
     <h1>Cargando</h1>
     <i class="fa fa-sync-alt fa-spin fa-2x "></i>
     <p>
         Espere por favor
     </p>
 </div>
-<div class="alert-warning alert text-center mt-3">
+<div *ngIf="!cargando && heroes.length == 0 " class="alert-warning alert text-center mt-3">
     <h1>No hay registro</h1>
     <i class="fa fa-exclamation fa-2x mb-3"></i>
 </div>
