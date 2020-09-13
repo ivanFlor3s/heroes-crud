@@ -71,7 +71,6 @@ export class HeroeComponent implements OnInit {
       allowOutsideClick: false
     });
     Swal.showLoading();
-    
 
     if ( this.heroeId ){
       this.heroeService.actualizarHeroe( this.heroe ).

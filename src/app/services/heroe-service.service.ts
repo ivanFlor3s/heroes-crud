@@ -29,4 +29,23 @@ export class HeroeServiceService {
     delete heroeTemp.id;
     return this.http.put(`${ this.url }/heroes/${heroe.id}.json`, heroeTemp);
   }
+
+  getHeroes(){
+    return this.http.get(`${ this.url }/heroes.json`)
+      .pipe(
+        map( this.crearArreglo )
+      );
+  }
+
+  private crearArreglo( heroesObject: Object ){
+    const heroesLista: HeroeModel[] = [];
+
+    Object.keys(heroesObject).forEach(key => {
+      const heroe: HeroeModel = heroesObject[key];
+      heroe.id = key;
+
+      heroesLista.push(heroe);
+    });
+    return heroesLista;
+  }
 }
